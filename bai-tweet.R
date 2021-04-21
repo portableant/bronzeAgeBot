@@ -11,7 +11,7 @@ baibot_token <- rtweet::create_token(
   access_secret =   Sys.getenv("TWITTER_ACCESS_TOKEN_SECRET")
 )
 hash <- digest(Sys.time(),algo="md5", serialize=TRUE)
-search <- paste0('http://131.111.22.71:8983/solr/micropastsBAI/select?q=*%3A*&rows=1&sort=random_',hash,'%20desc')
+search <- paste0('https://collection.beta.fitz.ms/bai?q=*%3A*&rows=1&sort=random_',hash,'%20desc')
 randomBAI <- fromJSON(search)
 records <- randomBAI$response$docs
 
