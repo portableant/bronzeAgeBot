@@ -21,7 +21,7 @@ objectType <- records$objectType
 collection <- unlist(records$collection)
 project <- unlist(records$project)
 imageUrl <- unlist(records$imageURL)
-hashtag <- '#prehistory #bronzeage #bai-bm'
+hashtag <- '#prehistory #bronzeage #baibm'
 tweet <- paste(period,objectType,collection,url,hashtag, sep=' ')
 temp_file <- tempfile()
 download.file(imageUrl, temp_file)
