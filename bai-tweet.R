@@ -3,8 +3,7 @@ library(rtweet)
 library(jsonlite)
 library(digest)
 # Create Twitter token
-baibot_token <- rtweet::create_token(
-  app = "findsbot",
+baibot_token <- rtweet::rtweet_bot(
   consumer_key =    Sys.getenv("TWITTER_CONSUMER_API_KEY"),
   consumer_secret = Sys.getenv("TWITTER_CONSUMER_API_SECRET"),
   access_token =    Sys.getenv("TWITTER_ACCESS_TOKEN"),
@@ -23,11 +22,12 @@ project <- unlist(records$project)
 imageUrl <- unlist(records$imageURL)
 hashtag <- '#prehistory #bronzeage #baibm'
 tweet <- paste(period,objectType,collection,url,hashtag, sep=' ')
-temp_file <- tempfile()
+temp_file <- tempfile(fileext = ".jpeg")
 download.file(imageUrl, temp_file)
 
 rtweet::post_tweet(
   status = tweet,
   media = temp_file,
-  token = baibot_token
+  token = baibot_token,
+  media_alt_text = tweet
 )
