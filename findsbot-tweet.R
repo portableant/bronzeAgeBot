@@ -12,17 +12,16 @@ findsbot_token <- rtweet::rtweet_bot(
 hash <- digest(Sys.time(),algo="md5", serialize=TRUE)
 search <- paste0('https://finds.org.uk/database/search/results/broadperiod/BRONZE+AGE/sort/random_', hash,'/show/1/thumbnail/1/format/json')
 randomFinds <- fromJSON(search)
-id <- randomFinds$results$id
-url <- paste0('https://finds.org.uk/database/artefacts/record/id/', id)
+id <- randomFinds$results$old_findID
+url <- paste0('https://bronze-age-index.micropasts.org/records/', id)
 period <- randomFinds$results$broadperiod
 objectType <- randomFinds$results$objecttype
 county <- randomFinds$results$county
-oldFindID <- randomFinds$results$old_findID
 imagedir <- randomFinds$results$imagedir
 image <- randomFinds$results$filename
 imageUrl <- paste0('https://finds.org.uk/', imagedir, URLencode(image))
 hashtag <- '#prehistory #bronzeage #findsorguk'
-tweet <- paste(period,objectType,'from',county,oldFindID,url,hashtag, sep=' ')
+tweet <- paste(period,objectType,'from',county,id,url,hashtag, sep=' ')
 temp_file <- tempfile(fileext = ".jpeg")
 download.file(imageUrl, temp_file)
 
